@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('category_id')->constrained()->restrictOnDelete();
             $table->string('name', 150);
-            $table->text('brand')->nullable();
+            $table->string('brand', 100)->nullable();
             $table->decimal('price', 15, 2)->default(0);
             $table->unsignedInteger('stock')->default(0);
             $table->text('description')->nullable();

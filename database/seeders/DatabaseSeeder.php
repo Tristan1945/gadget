@@ -20,8 +20,13 @@ class DatabaseSeeder extends Seeder
     {
         DB::transaction(function (): void {
             User::updateOrCreate(
-                ['email' => 'test@example.com'],
-                ['name' => 'Test User', 'password' => 'password']
+                ['email' => 'titan@gmail.com'],
+                ['name' => 'titan', 'password' => '1', 'role' => 'customer']
+            );
+
+            User::updateOrCreate(
+                ['email' => 'admin@gmail.com'],
+                ['name' => 'admin', 'password' => '123456', 'role' => 'admin']
             );
 
             Product::query()->delete();

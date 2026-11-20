@@ -8,9 +8,21 @@ use Illuminate\Validation\Rule;
 
 class CategoryController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $categories = Category::withCount('products')->orderBy('name')->paginate(10);
+        $categories = Category::withCount('products')
+            ->when($request->filled('q'), fn ($query) => $query->where(function ($query) use ($request) {
+                $keyword = $request->string('q')->toString();
+                $query->where('name', 'like', "%{$keyword}%")
+                    ->orWhere('description', 'like', "%{$keyword}%");
+            }))
+            ->when(
+                in_array($request->input('status'), ['Aktif', 'Nonaktif'], true),
+                fn ($query) => $query->where('status', $request->status)
+            )
+            ->orderBy('name')
+            ->paginate(10)
+            ->withQueryString();
 
         return view('categories.index', compact('categories'));
     }

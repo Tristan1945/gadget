@@ -1,30 +1,58 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
-
-        <title>{{ config('app.name', 'Laravel') }}</title>
-
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-
-        <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-    </head>
-    <body class="font-sans text-gray-900 antialiased">
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
-            <div>
-                <a href="/">
-                    <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-                </a>
-            </div>
-
-            <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
-                {{ $slot }}
-            </div>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>{{ config('app.name', 'Gadget Store') }}</title>
+    <link href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/gadget-dark.css') }}" rel="stylesheet">
+    <style>
+        body { min-height: 100vh; }
+        .auth-shell {
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+            padding: 28px 16px;
+            background:
+                radial-gradient(circle at 15% 20%, rgba(118,103,247,.28), transparent 28%),
+                radial-gradient(circle at 85% 80%, rgba(34,211,238,.16), transparent 30%),
+                linear-gradient(135deg,#090d1a,#10182b);
+        }
+        .auth-card {
+            width: 100%;
+            max-width: 460px;
+            background: rgba(17,24,42,.96);
+            border: 1px solid rgba(148,163,184,.16);
+            border-radius: 22px;
+            padding: 36px;
+            box-shadow: 0 24px 70px rgba(0,0,0,.32);
+        }
+        .auth-card .form-control {
+            height: 46px;
+        }
+        .auth-card .btn-block {
+            height: 46px;
+        }
+        .auth-brand {
+            width: 58px;
+            height: 58px;
+            border-radius: 16px;
+            display: inline-flex;
+            align-items:center;
+            justify-content:center;
+            background: linear-gradient(135deg,#7667f7,#22d3ee);
+            color:#fff;
+            margin-bottom:16px;
+        }
+    </style>
+</head>
+<body>
+    <main class="auth-shell">
+        <div class="auth-card">
+            {{ $slot }}
         </div>
-    </body>
+    </main>
+</body>
 </html>
